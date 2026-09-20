@@ -1,1 +1,1056 @@
 
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مدیریت فروشگاه هانلی</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f7f5f2;
+  color:#222;
+}
+
+header{
+  background:#111;
+  color:#fff;
+  padding:18px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:24px;
+}
+
+header p{
+  margin:7px 0 0;
+  color:#ccc;
+  font-size:13px;
+}
+
+.container{
+  max-width:1100px;
+  margin:25px auto;
+  padding:0 15px;
+}
+
+.card{
+  background:#fff;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,.07);
+}
+
+h2{
+  margin-top:0;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #ddd;
+  border-radius:9px;
+  font-family:inherit;
+  font-size:14px;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+button{
+  border:0;
+  border-radius:9px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-family:inherit;
+  margin:4px;
+}
+
+.btn{
+  background:#111;
+  color:white;
+}
+
+.btn-green{
+  background:#198754;
+  color:white;
+}
+
+.btn-red{
+  background:#dc3545;
+  color:white;
+}
+
+.btn-gray{
+  background:#eee;
+  color:#222;
+}
+
+.hidden{
+  display:none;
+}
+
+.login-box{
+  max-width:420px;
+  margin:80px auto;
+}
+
+.product{
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:15px;
+  margin:10px 0;
+  background:#fafafa;
+}
+
+.product-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.product-icon{
+  font-size:35px;
+}
+
+.price{
+  color:#198754;
+  font-weight:bold;
+}
+
+.stock{
+  color:#666;
+  font-size:13px;
+}
+
+.actions{
+  margin-top:10px;
+}
+
+.order{
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:15px;
+  margin:10px 0;
+  background:#fafafa;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#eee;
+  font-size:12px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:#f7f7f7;
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  margin-top:7px;
+}
+
+@media(max-width:700px){
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .product-top{
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+
+  <div class="login-box card">
+
+    <h2>🔐 ورود مدیریت هانلی</h2>
+
+    <p style="color:#777;font-size:13px;">
+      ورود مخصوص مدیر فروشگاه
+    </p>
+
+    <input
+      type="text"
+      id="adminUser"
+      placeholder="نام کاربری"
+    >
+
+    <input
+      type="password"
+      id="adminPass"
+      placeholder="رمز عبور"
+    >
+
+    <button class="btn" onclick="login()">
+      ورود به پنل
+    </button>
+
+    <p id="loginError"
+       style="color:#dc3545;font-size:13px;">
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN PANEL -->
+<div id="adminPage" class="hidden">
+
+<header>
+
+  <h1>🛍️ مدیریت فروشگاه هانلی</h1>
+
+  <p>
+    پنل مدیریت محصولات و سفارش‌ها
+  </p>
+
+</header>
+
+
+<div class="container">
+
+  <!-- STATS -->
+
+  <div class="card">
+
+    <h2>📊 آمار فروشگاه</h2>
+
+    <div class="stats">
+
+      <div class="stat">
+        محصولات
+        <strong id="productCount">0</strong>
+      </div>
+
+      <div class="stat">
+        سفارش‌ها
+        <strong id="orderCount">0</strong>
+      </div>
+
+      <div class="stat">
+        فروش
+        <strong id="salesCount">0</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ADD PRODUCT -->
+
+  <div class="card">
+
+    <h2>➕ افزودن محصول</h2>
+
+    <input
+      id="productName"
+      placeholder="نام محصول"
+    >
+
+    <input
+      id="productPrice"
+      type="number"
+      placeholder="قیمت به تومان"
+    >
+
+    <input
+      id="productCategory"
+      placeholder="دسته‌بندی مثلا لب، چشم، پوست"
+    >
+
+    <input
+      id="productIcon"
+      placeholder="ایموجی محصول مثلا 💄"
+      value="💄"
+    >
+
+    <input
+      id="productStock"
+      type="number"
+      placeholder="موجودی"
+      value="10"
+    >
+
+    <button
+      class="btn-green"
+      onclick="addProduct()"
+    >
+      افزودن محصول
+    </button>
+
+  </div>
+
+
+  <!-- PRODUCTS -->
+
+  <div class="card">
+
+    <h2>📦 محصولات</h2>
+
+    <div id="productsList"></div>
+
+  </div>
+
+
+  <!-- ORDERS -->
+
+  <div class="card">
+
+    <h2>🧾 سفارش‌ها</h2>
+
+    <div id="ordersList"></div>
+
+  </div>
+
+
+  <!-- SETTINGS -->
+
+  <div class="card">
+
+    <h2>⚙️ تنظیمات فروشگاه</h2>
+
+    <input
+      id="cardNumber"
+      placeholder="شماره کارت"
+      value="6219 8619 8303 3399"
+    >
+
+    <input
+      id="cardName"
+      placeholder="نام صاحب کارت"
+      value="هانیه کریمی خانقاه"
+    >
+
+    <input
+      id="whatsapp"
+      placeholder="شماره واتساپ بدون +"
+      value="989113899846"
+    >
+
+    <button
+      class="btn-green"
+      onclick="saveSettings()"
+    >
+      💾 ذخیره تنظیمات
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <button
+      class="btn-gray"
+      onclick="window.open('https://haneli-shop.github.io/','_blank')"
+    >
+      🌐 مشاهده سایت
+    </button>
+
+    <button
+      class="btn-red"
+      onclick="logout()"
+    >
+      🚪 خروج از مدیریت
+    </button>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+  const user =
+    document.getElementById("adminUser").value.trim();
+
+  const pass =
+    document.getElementById("adminPass").value;
+
+  /*
+    اطلاعات ورود فعلی:
+    username: admin
+    password: 123456
+  */
+
+  if(user === "admin" && pass === "123456"){
+
+    localStorage.setItem(
+      "haneliAdminLogin",
+      "true"
+    );
+
+    showAdmin();
+
+  }else{
+
+    document.getElementById("loginError").textContent =
+      "نام کاربری یا رمز عبور اشتباه است.";
+
+  }
+
+}
+
+
+function logout(){
+
+  localStorage.removeItem(
+    "haneliAdminLogin"
+  );
+
+  location.reload();
+
+}
+
+
+function showAdmin(){
+
+  document.getElementById("loginPage")
+    .classList.add("hidden");
+
+  document.getElementById("adminPage")
+    .classList.remove("hidden");
+
+  loadProducts();
+
+  loadOrders();
+
+  loadSettings();
+
+}
+
+
+if(
+  localStorage.getItem("haneliAdminLogin")
+  === "true"
+){
+
+  showAdmin();
+
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+let products =
+  JSON.parse(
+    localStorage.getItem("haneliProducts")
+  ) || [
+
+    {
+      id:1,
+      name:"رژ لب مات هانلی",
+      price:249000,
+      category:"لب",
+      icon:"💄",
+      stock:10
+    },
+
+    {
+      id:2,
+      name:"ریمل حجم‌دهنده",
+      price:319000,
+      category:"چشم",
+      icon:"👁️",
+      stock:10
+    },
+
+    {
+      id:3,
+      name:"کرم مرطوب‌کننده",
+      price:289000,
+      category:"پوست",
+      icon:"🧴",
+      stock:10
+    },
+
+    {
+      id:4,
+      name:"پالت سایه چشم",
+      price:459000,
+      category:"چشم",
+      icon:"🎨",
+      stock:10
+    },
+
+    {
+      id:5,
+      name:"بالم لب",
+      price:159000,
+      category:"لب",
+      icon:"💋",
+      stock:10
+    },
+
+    {
+      id:6,
+      name:"سرم مراقبت پوست",
+      price:529000,
+      category:"پوست",
+      icon:"✨",
+      stock:10
+    }
+
+  ];
+
+
+function saveProducts(){
+
+  localStorage.setItem(
+    "haneliProducts",
+    JSON.stringify(products)
+  );
+
+}
+
+
+function loadProducts(){
+
+  const box =
+    document.getElementById("productsList");
+
+  box.innerHTML = "";
+
+  document.getElementById("productCount")
+    .textContent = products.length;
+
+
+  if(products.length === 0){
+
+    box.innerHTML =
+      "<p>هنوز محصولی وجود ندارد.</p>";
+
+    return;
+
+  }
+
+
+  products.forEach(function(product,index){
+
+    box.innerHTML += `
+
+      <div class="product">
+
+        <div class="product-top">
+
+          <div>
+
+            <div style="font-size:18px;font-weight:bold;">
+              ${product.icon}
+              ${escapeHtml(product.name)}
+            </div>
+
+            <div class="price">
+              ${Number(product.price).toLocaleString("fa-IR")}
+              تومان
+            </div>
+
+            <div class="stock">
+              دسته‌بندی:
+              ${escapeHtml(product.category)}
+              |
+              موجودی:
+              ${product.stock}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="btn"
+            onclick="editProduct(${index})"
+          >
+            ✏️ ویرایش
+          </button>
+
+          <button
+            class="btn-red"
+            onclick="deleteProduct(${index})"
+          >
+            🗑️ حذف
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function addProduct(){
+
+  const name =
+    document.getElementById("productName")
+      .value.trim();
+
+  const price =
+    Number(
+      document.getElementById("productPrice")
+        .value
+    );
+
+  const category =
+    document.getElementById("productCategory")
+      .value.trim();
+
+  const icon =
+    document.getElementById("productIcon")
+      .value.trim() || "🛍️";
+
+  const stock =
+    Number(
+      document.getElementById("productStock")
+        .value
+    );
+
+
+  if(!name || !price){
+
+    alert("نام محصول و قیمت را وارد کنید.");
+
+    return;
+
+  }
+
+
+  products.push({
+
+    id:Date.now(),
+
+    name:name,
+
+    price:price,
+
+    category:category || "سایر",
+
+    icon:icon,
+
+    stock:stock
+
+  });
+
+
+  saveProducts();
+
+  loadProducts();
+
+
+  document.getElementById("productName")
+    .value = "";
+
+  document.getElementById("productPrice")
+    .value = "";
+
+  document.getElementById("productCategory")
+    .value = "";
+
+  document.getElementById("productIcon")
+    .value = "💄";
+
+  document.getElementById("productStock")
+    .value = 10;
+
+}
+
+
+function editProduct(index){
+
+  const product = products[index];
+
+  const name =
+    prompt(
+      "نام محصول:",
+      product.name
+    );
+
+  if(name === null) return;
+
+
+  const price =
+    prompt(
+      "قیمت به تومان:",
+      product.price
+    );
+
+  if(price === null) return;
+
+
+  const category =
+    prompt(
+      "دسته‌بندی:",
+      product.category
+    );
+
+  if(category === null) return;
+
+
+  const stock =
+    prompt(
+      "موجودی:",
+      product.stock
+    );
+
+  if(stock === null) return;
+
+
+  product.name = name.trim();
+
+  product.price = Number(price);
+
+  product.category = category.trim();
+
+  product.stock = Number(stock);
+
+
+  saveProducts();
+
+  loadProducts();
+
+}
+
+
+function deleteProduct(index){
+
+  const product = products[index];
+
+  if(
+    !confirm(
+      "آیا محصول «" +
+      product.name +
+      "» حذف شود؟"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  products.splice(index,1);
+
+  saveProducts();
+
+  loadProducts();
+
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+let orders =
+  JSON.parse(
+    localStorage.getItem("haneliOrders")
+  ) || [];
+
+
+function loadOrders(){
+
+  const box =
+    document.getElementById("ordersList");
+
+  box.innerHTML = "";
+
+  document.getElementById("orderCount")
+    .textContent = orders.length;
+
+
+  if(orders.length === 0){
+
+    box.innerHTML =
+      "<p>هنوز سفارشی ثبت نشده است.</p>";
+
+    document.getElementById("salesCount")
+      .textContent = "0";
+
+    return;
+
+  }
+
+
+  let totalSales = 0;
+
+
+  orders.forEach(function(order,index){
+
+    totalSales +=
+      Number(order.total || 0);
+
+
+    box.innerHTML += `
+
+      <div class="order">
+
+        <div>
+          <strong>
+            سفارش شماره ${index + 1}
+          </strong>
+
+          <span class="badge">
+            ${escapeHtml(order.status || "جدید")}
+          </span>
+        </div>
+
+        <hr>
+
+        <p>
+          👤 مشتری:
+          ${escapeHtml(order.name || "-")}
+        </p>
+
+        <p>
+          📞 تلفن:
+          ${escapeHtml(order.phone || "-")}
+        </p>
+
+        <p>
+          📍 آدرس:
+          ${escapeHtml(order.address || "-")}
+        </p>
+
+        <p>
+          💰 مبلغ:
+          <strong>
+            ${Number(order.total || 0).toLocaleString("fa-IR")}
+            تومان
+          </strong>
+        </p>
+
+        <p>
+          🛍️ محصولات:
+          ${escapeHtml(order.itemsText || "-")}
+        </p>
+
+        <p>
+          🕐 تاریخ:
+          ${escapeHtml(order.date || "-")}
+        </p>
+
+        <button
+          class="btn-green"
+          onclick="changeOrderStatus(${index})"
+        >
+          تغییر وضعیت
+        </button>
+
+        <button
+          class="btn-red"
+          onclick="deleteOrder(${index})"
+        >
+          حذف سفارش
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+
+  document.getElementById("salesCount")
+    .textContent =
+      totalSales.toLocaleString("fa-IR") +
+      " تومان";
+
+}
+
+
+function changeOrderStatus(index){
+
+  const statuses = [
+    "جدید",
+    "تأیید شده",
+    "در حال آماده‌سازی",
+    "ارسال شده",
+    "تحویل داده شده",
+    "لغو شده"
+  ];
+
+
+  const current =
+    orders[index].status || "جدید";
+
+
+  const answer =
+    prompt(
+      "وضعیت جدید را وارد کنید:\n\n" +
+      statuses.join("\n"),
+      current
+    );
+
+
+  if(answer === null) return;
+
+
+  orders[index].status =
+    answer.trim() || "جدید";
+
+
+  localStorage.setItem(
+    "haneliOrders",
+    JSON.stringify(orders)
+  );
+
+
+  loadOrders();
+
+}
+
+
+function deleteOrder(index){
+
+  if(
+    !confirm(
+      "این سفارش حذف شود؟"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  orders.splice(index,1);
+
+
+  localStorage.setItem(
+    "haneliOrders",
+    JSON.stringify(orders)
+  );
+
+
+  loadOrders();
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function saveSettings(){
+
+  const settings = {
+
+    cardNumber:
+      document.getElementById("cardNumber")
+        .value.trim(),
+
+    cardName:
+      document.getElementById("cardName")
+        .value.trim(),
+
+    whatsapp:
+      document.getElementById("whatsapp")
+        .value.trim()
+
+  };
+
+
+  localStorage.setItem(
+    "haneliSettings",
+    JSON.stringify(settings)
+  );
+
+
+  alert("تنظیمات ذخیره شد.");
+
+}
+
+
+function loadSettings(){
+
+  const settings =
+    JSON.parse(
+      localStorage.getItem("haneliSettings")
+    );
+
+
+  if(!settings) return;
+
+
+  document.getElementById("cardNumber")
+    .value =
+      settings.cardNumber || "";
+
+  document.getElementById("cardName")
+    .value =
+      settings.cardName || "";
+
+  document.getElementById("whatsapp")
+    .value =
+      settings.whatsapp || "";
+
+}
+
+
+/* =========================
+   SECURITY HELPER
+========================= */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
