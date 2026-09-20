@@ -2,107 +2,677 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>هانلی | فروشگاه لوازم آرایشی</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>هانلی | فروشگاه آرایشی</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
-
 body{
-    margin:0;
-    font-family:Tahoma,Arial,sans-serif;
-    background:#fff7fb;
-    color:#333;
+margin:0;
+font-family:Tahoma,Arial,sans-serif;
+background:#fff7fa;
+color:#333
 }
-
 header{
-    background:linear-gradient(135deg,#d81b60,#ad1457);
-    color:white;
-    padding:18px 15px;
-    text-align:center;
+background:#d81b60;
+color:#fff;
+padding:20px;
+text-align:center
 }
-
 .logo{
-    font-size:30px;
-    font-weight:bold;
-    margin-bottom:6px;
+font-size:30px;
+font-weight:bold
 }
-
-.subtitle{
-    font-size:14px;
-    opacity:.9;
+button{
+border:0;
+border-radius:10px;
+padding:11px 15px;
+cursor:pointer;
+font-family:inherit
 }
-
 nav{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:15px;
+margin-top:15px;
+display:flex;
+justify-content:center;
+gap:8px;
+flex-wrap:wrap
 }
-
 nav button{
-    border:0;
-    border-radius:25px;
-    padding:10px 16px;
-    background:white;
-    color:#ad1457;
-    font-weight:bold;
-    cursor:pointer;
+background:#fff;
+color:#d81b60;
+font-weight:bold
 }
-
 .container{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
+max-width:1000px;
+margin:auto;
+padding:20px
 }
-
 .search{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    margin-bottom:15px;
-    font-size:16px;
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+font-family:inherit;
+font-size:15px;
+box-sizing:border-box;
+margin-bottom:15px
 }
-
 .categories{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:20px;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:20px
 }
-
 .categories button{
-    border:0;
-    padding:9px 15px;
-    border-radius:20px;
-    background:#f3d2df;
-    color:#8e1747;
-    cursor:pointer;
+background:#f8d5e1;
+color:#a3154d
 }
-
-.categories button.active{
-    background:#d81b60;
-    color:white;
+.categories .active{
+background:#d81b60;
+color:#fff
 }
-
 .products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px
 }
-
 .product{
-    background:white;
-    border-radius:18px;
-    padding:18px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-    text-align:center;
+background:#fff;
+padding:18px;
+border-radius:15px;
+box-shadow:0 3px 12px #00000012;
+text-align:center
+}
+.pic{
+height:130px;
+background:#fde0e9;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:55px
+}
+.price{
+color:#d81b60;
+font-weight:bold;
+margin:12px 0
+}
+.add,.main{
+background:#d81b60;
+color:white;
+width:100%
+}
+.section{
+display:none;
+background:#fff;
+padding:20px;
+margin-top:20px;
+border-radius:15px;
+box-shadow:0 3px 12px #00000012
+}
+.section.show{
+display:block
+}
+input,textarea{
+width:100%;
+padding:12px;
+box-sizing:border-box;
+border:1px solid #ddd;
+border-radius:9px;
+font-family:inherit;
+margin:6px 0 12px
+}
+textarea{
+height:100px
+}
+.tabs{
+display:flex;
+gap:8px;
+margin-bottom:15px
+}
+.tabs button{
+flex:1;
+background:#f8d5e1;
+color:#a3154d
+}
+.tabs .active{
+background:#d81b60;
+color:#fff
+}
+.form{
+display:none
+}
+.form.show{
+display:block
+}
+.message{
+display:none;
+padding:10px;
+border-radius:8px;
+margin-bottom:12px;
+text-align:center
+}
+.success{
+display:block;
+background:#e8f5e9;
+color:#267332
+}
+.error{
+display:block;
+background:#ffebee;
+color:#c62828
+}
+.cart-item{
+border-bottom:1px solid #eee;
+padding:14px 0
+}
+.qty{
+display:flex;
+align-items:center;
+gap:7px;
+margin-top:8px
+}
+.qty button{
+background:#f8d5e1;
+color:#a3154d;
+padding:6px 11px
+}
+.remove{
+background:#ffebee;
+color:#c62828
+}
+.total{
+font-size:20px;
+font-weight:bold;
+color:#d81b60;
+text-align:center;
+margin:20px 0
+}
+.payment{
+background:#fff0f5;
+padding:15px;
+border-radius:10px;
+line-height:2;
+margin:15px 0
+}
+.close{
+float:left;
+background:#eee
+}
+footer{
+text-align:center;
+padding:30px;
+color:#777
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">🌸 هانلی</div>
+<div>فروشگاه لوازم آرایشی و مراقبت از پوست</div>
+
+<nav>
+<button onclick="openAccount()">👤 ثبت‌نام / ورود</button>
+<button onclick="openCart()">🛒 سبد خرید (<span id="count">0</span>)</button>
+</nav>
+</header>
+
+<div class="container">
+
+<input
+class="search"
+id="search"
+placeholder="🔎 جستجوی محصول..."
+oninput="showProducts()"
+>
+
+<div class="categories">
+<button class="active" onclick="category('همه',this)">همه</button>
+<button onclick="category('لب',this)">لب</button>
+<button onclick="category('چشم',this)">چشم</button>
+<button onclick="category('پوست',this)">پوست</button>
+</div>
+
+<div id="products" class="products"></div>
+
+<!-- حساب -->
+<div id="account" class="section">
+
+<button class="close" onclick="closeAll()">✕</button>
+
+<h2>👤 حساب کاربری</h2>
+
+<div id="message" class="message"></div>
+
+<div id="auth">
+
+<div class="tabs">
+<button id="regTab" class="active" onclick="registerTab()">ثبت‌نام</button>
+<button id="loginTab" onclick="loginTab()">ورود</button>
+</div>
+
+<div id="register" class="form show">
+
+<label>نام و نام خانوادگی</label>
+<input id="name" placeholder="نام و نام خانوادگی">
+
+<label>شماره موبایل</label>
+<input id="phone" type="tel" placeholder="09xxxxxxxxx">
+
+<label>رمز عبور</label>
+<input id="pass" type="password" placeholder="رمز عبور">
+
+<label>تکرار رمز عبور</label>
+<input id="pass2" type="password" placeholder="تکرار رمز عبور">
+
+<button class="main" onclick="registerUser()">ثبت‌نام</button>
+
+</div>
+
+<div id="login" class="form">
+
+<label>شماره موبایل</label>
+<input id="lphone" type="tel" placeholder="09xxxxxxxxx">
+
+<label>رمز عبور</label>
+<input id="lpass" type="password" placeholder="رمز عبور">
+
+<button class="main" onclick="loginUser()">ورود به حساب</button>
+
+</div>
+
+</div>
+
+<div id="user" style="display:none"></div>
+
+</div>
+
+<!-- سبد -->
+<div id="cart" class="section">
+
+<button class="close" onclick="closeAll()">✕</button>
+
+<h2>🛒 سبد خرید</h2>
+
+<div id="items"></div>
+
+<div id="total" class="total"></div>
+
+<div id="checkout" style="display:none">
+
+<h3>📦 اطلاعات سفارش</h3>
+
+<label>نام و نام خانوادگی</label>
+<input id="cname">
+
+<label>شماره موبایل</label>
+<input id="cphone">
+
+<label>آدرس کامل</label>
+<textarea id="address" placeholder="آدرس کامل برای ارسال"></textarea>
+
+<div class="payment">
+<b>💳 پرداخت کارت به کارت</b><br>
+شماره کارت:
+<b>6219 8619 8303 3399</b><br>
+به نام:
+<b>هانیه کریمی خانقاه</b>
+<br>
+لطفاً پس از پرداخت، تصویر رسید را در واتساپ ارسال کنید.
+</div>
+
+<label>🧾 تصویر رسید</label>
+<input type="file" accept="image/*">
+
+<div class="payment">
+🚚 هزینه ارسال بر عهده خریدار است و هنگام تحویل درب منزل پرداخت می‌شود.
+</div>
+
+<button class="main" onclick="order()">📱 ثبت سفارش در واتساپ</button>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+🌸 هانلی
+</footer>
+
+<script>
+
+var products=[
+{id:1,name:"رژ لب مات هانلی",price:249000,cat:"لب",icon:"💄"},
+{id:2,name:"ریمل حجم‌دهنده",price:319000,cat:"چشم",icon:"👁️"},
+{id:3,name:"کرم مرطوب‌کننده",price:289000,cat:"پوست",icon:"🧴"},
+{id:4,name:"پالت سایه چشم",price:459000,cat:"چشم",icon:"🎨"},
+{id:5,name:"بالم لب",price:159000,cat:"لب",icon:"💋"},
+{id:6,name:"سرم مراقبت پوست",price:529000,cat:"پوست",icon:"✨"}
+];
+
+var selected="همه";
+
+var cartData=[];
+
+try{
+cartData=JSON.parse(localStorage.getItem("haneliCart")||"[]");
+}catch(e){
+cartData=[];
 }
 
-.product-image{
-    height:150px;
-    border
+function money(n){
+return Number(n).toLocaleString("fa-IR")+" تومان";
+}
+
+function save(){
+localStorage.setItem("haneliCart",JSON.stringify(cartData));
+}
+
+function showProducts(){
+
+var box=document.getElementById("products");
+var search=document.getElementById("search").value.toLowerCase();
+
+var result=products.filter(function(p){
+
+var cat=selected==="همه"||p.cat===selected;
+var text=p.name.toLowerCase().indexOf(search)>-1;
+
+return cat&&text;
+
+});
+
+box.innerHTML="";
+
+result.forEach(function(p){
+
+box.innerHTML+=
+'<div class="product">'+
+'<div class="pic">'+p.icon+'</div>'+
+'<h3>'+p.name+'</h3>'+
+'<div>دسته: '+p.cat+'</div>'+
+'<div class="price">'+money(p.price)+'</div>'+
+'<button class="add" onclick="add('+p.id+')">➕ افزودن به سبد</button>'+
+'</div>';
+
+});
+
+}
+
+function category(cat,btn){
+
+selected=cat;
+
+document.querySelectorAll(".categories button")
+.forEach(function(x){
+x.classList.remove("active");
+});
+
+btn.classList.add("active");
+
+showProducts();
+
+}
+
+function add(id){
+
+var item=cartData.find(function(x){
+return x.id===id;
+});
+
+if(item){
+item.qty++;
+}else{
+cartData.push({id:id,qty:1});
+}
+
+save();
+drawCart();
+
+alert("محصول به سبد خرید اضافه شد 🌸");
+
+}
+
+function plus(id){
+
+var x=cartData.find(function(a){
+return a.id===id;
+});
+
+if(x)x.qty++;
+
+save();
+drawCart();
+
+}
+
+function minus(id){
+
+var x=cartData.find(function(a){
+return a.id===id;
+});
+
+if(!x)return;
+
+x.qty--;
+
+if(x.qty<=0){
+cartData=cartData.filter(function(a){
+return a.id!==id;
+});
+}
+
+save();
+drawCart();
+
+}
+
+function removeItem(id){
+
+cartData=cartData.filter(function(a){
+return a.id!==id;
+});
+
+save();
+drawCart();
+
+}
+
+function drawCart(){
+
+var box=document.getElementById("items");
+var total=0;
+var count=0;
+
+box.innerHTML="";
+
+cartData.forEach(function(item){
+
+var p=products.find(function(x){
+return x.id===item.id;
+});
+
+if(!p)return;
+
+var sum=p.price*item.qty;
+
+total+=sum;
+count+=item.qty;
+
+box.innerHTML+=
+'<div class="cart-item">'+
+'<b>'+p.name+'</b><br>'+
+money(p.price)+
+'<div class="qty">'+
+'<button onclick="minus('+p.id+')">−</button>'+
+'<b>'+item.qty+'</b>'+
+'<button onclick="plus('+p.id+')">+</button>'+
+'<button class="remove" onclick="removeItem('+p.id+')">🗑️ حذف</button>'+
+'</div>'+
+'<div>'+money(sum)+'</div>'+
+'</div>';
+
+});
+
+document.getElementById("count").innerText=count;
+
+if(cartData.length===0){
+
+box.innerHTML="<p style='text-align:center'>سبد خرید خالی است 🛒</p>";
+
+document.getElementById("total").innerText="";
+document.getElementById("checkout").style.display="none";
+
+}else{
+
+document.getElementById("total").innerText=
+"مجموع سفارش: "+money(total);
+
+document.getElementById("checkout").style.display="block";
+
+fillCustomer();
+
+}
+
+}
+
+function openAccount(){
+
+document.getElementById("cart").classList.remove("show");
+document.getElementById("account").classList.add("show");
+
+showUser();
+
+window.scrollTo(0,document.getElementById("account").offsetTop);
+
+}
+
+function openCart(){
+
+document.getElementById("account").classList.remove("show");
+document.getElementById("cart").classList.add("show");
+
+drawCart();
+
+window.scrollTo(0,document.getElementById("cart").offsetTop);
+
+}
+
+function closeAll(){
+
+document.getElementById("account").classList.remove("show");
+document.getElementById("cart").classList.remove("show");
+
+}
+
+function registerTab(){
+
+document.getElementById("register").classList.add("show");
+document.getElementById("login").classList.remove("show");
+
+document.getElementById("regTab").classList.add("active");
+document.getElementById("loginTab").classList.remove("active");
+
+}
+
+function loginTab(){
+
+document.getElementById("login").classList.add("show");
+document.getElementById("register").classList.remove("show");
+
+document.getElementById("loginTab").classList.add("active");
+document.getElementById("regTab").classList.remove("active");
+
+}
+
+function msg(text,type){
+
+var m=document.getElementById("message");
+
+m.innerText=text;
+m.className="message "+type;
+
+}
+
+function registerUser(){
+
+var name=document.getElementById("name").value.trim();
+var phone=document.getElementById("phone").value.trim();
+var pass=document.getElementById("pass").value;
+var pass2=document.getElementById("pass2").value;
+
+if(!name||!phone||!pass||!pass2){
+
+msg("لطفاً همه قسمت‌ها را پر کنید.","error");
+return;
+
+}
+
+if(pass!==pass2){
+
+msg("رمزهای عبور یکسان نیستند.","error");
+return;
+
+}
+
+var user={
+name:name,
+phone:phone,
+pass:pass
+};
+
+localStorage.setItem("haneliUser",JSON.stringify(user));
+localStorage.setItem("haneliLogin","1");
+
+msg("ثبت‌نام با موفقیت انجام شد 🌸","success");
+
+showUser();
+fillCustomer();
+
+}
+
+function loginUser(){
+
+var phone=document.getElementById("lphone").value.trim();
+var pass=document.getElementById("lpass").value;
+
+var saved=localStorage.getItem("haneliUser");
+
+if(!saved){
+
+msg("ابتدا باید ثبت‌نام کنید.","error");
+return;
+
+}
+
+var user=JSON.parse(saved);
+
+if(user.phone===phone&&user.pass===pass){
+
+localStorage.setItem("haneliLogin","1");
+
+msg("ورود موفق بود 🌸","success");
+
+showUser();
+fillCustomer();
+
+}else{
+
+msg("شماره موبایل یا رمز عبور اشتباه است.","error");
+
+}
+
+}
+
+function showUser(){
+
+var saved=localStorage.getItem("haneliUser");
+var login=localStorage.getItem("haneliLogin");
+
+if(saved&&login==="1"){
+
+var user=JSON.parse(saved);
+
+document.getElementById("auth
