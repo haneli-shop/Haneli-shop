@@ -7,946 +7,185 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
-margin:0;
-font-family:Tahoma,Arial,sans-serif;
-background:#fff8fb;
-color:#292329
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#fff7fa;
+  color:#333
 }
-
 header{
-background:#fff;
-border-bottom:1px solid #f0dce6;
-position:sticky;
-top:0;
-z-index:5
+  background:#d81b60;
+  color:white;
+  padding:18px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:10
 }
-
+header h1{margin:0 0 8px}
+header p{margin:0}
 nav{
-max-width:1100px;
-margin:auto;
-padding:15px 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px
+  margin-top:12px;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap
 }
-
-.logo{
-font-size:28px;
-font-weight:800;
-color:#9d3565
+button{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-family:inherit
 }
-
-.logo small{
-display:block;
-font-size:11px;
-color:#888;
-font-weight:400
-}
-
+.nav-btn{background:white;color:#d81b60}
+.container{max-width:1100px;margin:auto;padding:20px}
 .search{
-flex:1;
-max-width:430px;
-padding:12px 16px;
-border:1px solid #ead5df;
-border-radius:25px;
-outline:0
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin-bottom:20px;
+  font-family:inherit
 }
-
-.cart{
-border:0;
-background:#9d3565;
-color:white;
-padding:11px 17px;
-border-radius:24px;
-cursor:pointer
+.categories{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  margin-bottom:20px
 }
-
-.hero{
-max-width:1100px;
-margin:25px auto;
-padding:45px 25px;
-border-radius:25px;
-background:linear-gradient(120deg,#f8dbe7,#fff);
-text-align:center
+.categories button{background:#f8d7e3}
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px
 }
-
-.hero h1{
-font-size:38px;
-margin:0 0 10px
+.product{
+  background:white;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 3px 12px #00000012;
+  text-align:center
 }
-
-.hero p{
-color:#6f6268
-}
-
-.categories,.products{
-max-width:1100px;
-margin:25px auto;
-padding:0 20px
-}
-
-.categories button{
-background:white;
-border:1px solid #ead5df;
-padding:9px 15px;
-border-radius:20px;
-margin:5px;
-cursor:pointer
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-gap:18px
-}
-
-.card{
-background:#fff;
-border:1px solid #f0dce6;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 4px 15px #8d4c6710
-}
-
-.pic{
-height:190px;
-background:#f8edf2;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:65px
-}
-
-.info{
-padding:15px
-}
-
-.info h3{
-margin:0 0 8px
-}
-
+.product .emoji{font-size:50px}
+.product h3{font-size:16px}
 .price{
-font-weight:bold;
-color:#9d3565;
-margin:10px 0
+  color:#d81b60;
+  font-weight:bold;
+  margin:10px
 }
-
 .add{
-width:100%;
-padding:11px;
-border:0;
-border-radius:12px;
-background:#9d3565;
-color:#fff;
-cursor:pointer
+  background:#d81b60;
+  color:white;
+  width:100%
 }
-
-footer{
-text-align:center;
-padding:35px;
-color:#88747d
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:100;
+  padding:15px;
+  overflow:auto
 }
-
-#modal{
-display:none;
-position:fixed;
-inset:0;
-background:#0008;
-z-index:10;
-padding:20px
+.modal-box{
+  background:white;
+  max-width:600px;
+  margin:30px auto;
+  padding:20px;
+  border-radius:18px
 }
-
-.box{
-background:#fff;
-max-width:550px;
-margin:40px auto;
-padding:22px;
-border-radius:20px;
-max-height:90vh;
-overflow:auto
-}
-
 .close{
-float:left;
-border:0;
-background:#eee;
-border-radius:50%;
-width:30px;
-height:30px;
-font-size:18px;
-cursor:pointer
+  background:#eee;
+  float:left
 }
-
-.item{
-border-bottom:1px solid #eee;
-padding:14px 0
+.cart-item{
+  border-bottom:1px solid #eee;
+  padding:12px 0
 }
-
 .item-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px
+  display:flex;
+  justify-content:space-between;
+  gap:10px
 }
-
-.item-name{
-font-weight:bold
-}
-
-.item-price{
-color:#9d3565;
-font-weight:bold
-}
-
 .controls{
-display:flex;
-align-items:center;
-gap:8px;
-margin-top:10px
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-top:10px
 }
-
 .qty-btn{
-border:0;
-background:#f3e2ea;
-color:#9d3565;
-width:32px;
-height:32px;
-border-radius:8px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer
+  background:#f3d4df;
+  width:38px;
+  height:38px;
+  font-size:20px;
+  padding:0
 }
-
 .qty{
-min-width:30px;
-text-align:center;
-font-weight:bold
+  min-width:30px;
+  text-align:center;
+  font-weight:bold
 }
-
-.delete-btn{
-border:0;
-background:#ffe5eb;
-color:#c62855;
-padding:7px 10px;
-border-radius:8px;
-cursor:pointer;
-margin-right:auto
+.delete{
+  background:#ffe0e0;
+  color:#c00;
+  margin-right:auto
 }
-
-input,textarea{
-width:100%;
-padding:12px;
-margin:6px 0;
-border:1px solid #ddd;
-border-radius:10px;
-font-family:inherit
+.total{
+  font-size:20px;
+  font-weight:bold;
+  color:#d81b60;
+  margin:20px 0
 }
-
-.pay{
-width:100%;
-padding:13px;
-border:0;
-border-radius:12px;
-background:#222;
-color:white;
-margin-top:10px;
-cursor:pointer;
-font-family:inherit
-}
-
-.card-info{
-background:#fff4f8;
-padding:15px;
-border-radius:12px;
-margin:10px 0;
-border:1px solid #f0dce6
-}
-
-.card-number{
-font-size:20px;
-letter-spacing:1px;
-direction:ltr;
-display:inline-block;
-margin:5px 0
-}
-
 .shipping{
-background:#fff8fb;
-padding:13px;
-border-radius:12px;
-margin-top:10px;
-color:#7a5264;
-font-size:13px;
-border:1px solid #f0dce6
+  background:#fff1c9;
+  padding:12px;
+  border-radius:10px;
+  margin:15px 0;
+  font-size:14px
 }
-
-.empty{
-text-align:center;
-padding:20px;
-color:#888
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-family:inherit
 }
-
-@media(max-width:600px){
-.hero h1{font-size:29px}
-.search{max-width:180px}
-.logo{font-size:22px}
+.primary{
+  background:#d81b60;
+  color:white;
+  width:100%;
+  margin-top:8px
 }
-</style>
-</head>
-
-<body>
-
-<header>
-
-<nav>
-
-<div class="logo">
-هانلی
-<small>فروشگاه لوازم آرایشی</small>
-</div>
-
-<input
-id="search"
-class="search"
-placeholder="جست‌وجوی محصول..."
-oninput="render()"
->
-
-<button class="cart" onclick="openCart()">
-🛒 سبد خرید <span id="count">0</span>
-</button>
-
-</nav>
-
-</header>
-
-
-<section class="hero">
-
-<h1>زیبایی، انتخاب توست ✨</h1>
-
-<p>
-محصولات آرایشی منتخب را در فروشگاه هانلی پیدا کن.
-</p>
-
-</section>
-
-
-<section class="categories">
-
-<h2>دسته‌بندی‌ها</h2>
-
-<button onclick="setCat('همه')">
-همه
-</button>
-
-<button onclick="setCat('لب')">
-رژ لب
-</button>
-
-<button onclick="setCat('چشم')">
-آرایش چشم
-</button>
-
-<button onclick="setCat('پوست')">
-مراقبت پوست
-</button>
-
-</section>
-
-
-<section class="products">
-
-<h2>محصولات</h2>
-
-<div id="grid" class="grid"></div>
-
-</section>
-
-
-<footer>
-© هانلی — فروشگاه لوازم آرایشی
-</footer>
-
-
-<div id="modal">
-
-<div class="box">
-
-<button class="close" onclick="closeCart()">
-×
-</button>
-
-<h2>🛒 سبد خرید</h2>
-
-<div id="cart"></div>
-
-<div id="total"
-style="font-weight:bold;margin-top:15px">
-</div>
-
-<div class="shipping">
-
-🚚 <b>هزینه ارسال:</b>
-
-بر عهده خریدار است و هنگام تحویل درب منزل پرداخت می‌شود.
-
-</div>
-
-
-<h3>
-اطلاعات سفارش
-</h3>
-
-<input
-id="name"
-placeholder="نام و نام خانوادگی"
->
-
-<input
-id="phone"
-placeholder="شماره موبایل"
->
-
-<textarea
-id="address"
-placeholder="آدرس"
-></textarea>
-
-
-<h3>
-💳 پرداخت کارت‌به‌کارت
-</h3>
-
-<div class="card-info">
-
-<b>
-شماره کارت:
-</b>
-
-<br>
-
-<span class="card-number">
-6219 8619 8303 3399
-</span>
-
-<br>
-
-<b>
-به نام:
-</b>
-
-هانیه کریمی خانقاه
-
-<p
-style="font-size:13px;color:#777;margin-bottom:0">
-
-لطفاً مبلغ سفارش را به این کارت واریز کنید.
-
-</p>
-
-</div>
-
-
-<label style="font-size:13px">
-
-📷 انتخاب عکس رسید پرداخت:
-
-</label>
-
-<input
-id="receipt"
-type="file"
-accept="image/*"
->
-
-
-<button
-class="pay"
-onclick="checkout()"
->
-
-ثبت سفارش و ارسال به واتساپ
-
-</button>
-
-
-<p
-style="font-size:12px;color:#777"
->
-
-بعد از ثبت سفارش، واتساپ باز می‌شود.
-لطفاً عکس رسید پرداخت را نیز در همان واتساپ ارسال کنید.
-
-</p>
-
-</div>
-
-</div>
-
-
-<script>
-
-const products=[
-
-{
-id:1,
-name:"رژ لب مات هانلی",
-cat:"لب",
-price:249000,
-emoji:"💄"
-},
-
-{
-id:2,
-name:"ریمل حجم‌دهنده",
-cat:"چشم",
-price:319000,
-emoji:"🖤"
-},
-
-{
-id:3,
-name:"کرم مرطوب‌کننده",
-cat:"پوست",
-price:289000,
-emoji:"🧴"
-},
-
-{
-id:4,
-name:"پالت سایه چشم",
-cat:"چشم",
-price:459000,
-emoji:"🎨"
-},
-
-{
-id:5,
-name:"بالم لب",
-cat:"لب",
-price:159000,
-emoji:"💋"
-},
-
-{
-id:6,
-name:"سرم مراقبت پوست",
-cat:"پوست",
-price:529000,
-emoji:"✨"
+.whatsapp{
+  background:#25d366;
+  color:white;
+  width:100%;
+  margin-top:10px
 }
-
-];
-
-
-let cat="همه";
-
-let cart=[];
-
-
-const money=n =>
-n.toLocaleString("fa-IR")+" تومان";
-
-
-function setCat(c){
-
-cat=c;
-
-render();
-
+.card-box{
+  background:#f8f8f8;
+  padding:15px;
+  border-radius:12px;
+  margin:15px 0
 }
-
-
-function render(){
-
-let q=
-document
-.getElementById("search")
-.value
-.trim()
-.toLowerCase();
-
-
-let list=
-products.filter(p =>
-
-(cat==="همه"||p.cat===cat)
-
-&&
-
-(!q||p.name.toLowerCase().includes(q))
-
-);
-
-
-document
-.getElementById("grid")
-.innerHTML=
-
-list.map(p=>`
-
-<article class="card">
-
-<div class="pic">
-${p.emoji}
-</div>
-
-<div class="info">
-
-<h3>
-${p.name}
-</h3>
-
-<small>
-${p.cat}
-</small>
-
-<div class="price">
-${money(p.price)}
-</div>
-
-<button
-class="add"
-onclick="add(${p.id})"
->
-
-افزودن به سبد خرید
-
-</button>
-
-</div>
-
-</article>
-
-`).join("");
-
-
-document
-.getElementById("count")
-.textContent=
-
-cart.reduce(
-(a,x)=>a+x.qty,
-0
-);
-
+.user-box{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  margin-bottom:20px;
+  box-shadow:0 3px 12px #00000010
 }
-
-
-function add(id){
-
-let x=
-cart.find(x=>x.id===id);
-
-
-if(x){
-
-x.qty++;
-
+.hidden{display:none}
+.logout{
+  background:#eee;
+  color:#c00
 }
-
-else{
-
-cart.push({
-id:id,
-qty:1
-});
-
-}
-
-
-render();
-
-openCart();
-
-}
-
-
-function increase(id){
-
-let x=
-cart.find(x=>x.id===id);
-
-if(x){
-
-x.qty++;
-
-}
-
-drawCart();
-
-render();
-
-}
-
-
-function decrease(id){
-
-let x=
-cart.find(x=>x.id===id);
-
-if(!x)return;
-
-
-if(x.qty>1){
-
-x.qty--;
-
-}
-
-else{
-
-cart=
-cart.filter(x=>x.id!==id);
-
-}
-
-
-drawCart();
-
-render();
-
-}
-
-
-function removeItem(id){
-
-cart=
-cart.filter(x=>x.id!==id);
-
-drawCart();
-
-render();
-
-}
-
-
-function openCart(){
-
-document
-.getElementById("modal")
-.style.display="block";
-
-drawCart();
-
-}
-
-
-function closeCart(){
-
-document
-.getElementById("modal")
-.style.display="none";
-
-}
-
-
-function drawCart(){
-
-let el=
-document.getElementById("cart");
-
-
-if(!cart.length){
-
-el.innerHTML=
-`
-<div class="empty">
-🛒 سبد خرید خالی است.
-</div>
-`;
-
-document
-.getElementById("total")
-.textContent="";
-
-return;
-
-}
-
-
-el.innerHTML=
-
-cart.map(x=>{
-
-let p=
-products.find(p=>p.id===x.id);
-
-
-return `
-
-<div class="item">
-
-<div class="item-top">
-
-<span class="item-name">
-${p.name}
-</span>
-
-<span class="item-price">
-${money(p.price*x.qty)}
-</span>
-
-</div>
-
-
-<div class="controls">
-
-<button
-class="qty-btn"
-onclick="decrease(${p.id})"
->
-−
-</button>
-
-<span class="qty">
-${x.qty}
-</span>
-
-<button
-class="qty-btn"
-onclick="increase(${p.id})"
->
-+
-</button>
-
-
-<button
-class="delete-btn"
-onclick="removeItem(${p.id})"
->
-🗑️ حذف
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-
-let total=
-cart.reduce(
-
-(s,x)=>
-
-s+
-products.find(
-p=>p.id===x.id
-).price*x.qty,
-
-0
-
-);
-
-
-document
-.getElementById("total")
-.textContent=
-
-"جمع محصولات: "+money(total);
-
-}
-
-
-function checkout(){
-
-if(!cart.length){
-
-return alert(
-"سبد خرید خالی است."
-);
-
-}
-
-
-const name=
-document
-.getElementById("name")
-.value
-.trim();
-
-
-const phone=
-document
-.getElementById("phone")
-.value
-.trim();
-
-
-const address=
-document
-.getElementById("address")
-.value
-.trim();
-
-
-if(!name||!phone||!address){
-
-return alert(
-"لطفاً اطلاعات سفارش را کامل کنید."
-);
-
-}
-
-
-const total=
-cart.reduce(
-
-(s,x)=>
-
-s+
-products.find(
-p=>p.id===x.id
-).price*x.qty,
-
-0
-
-);
-
-
-const items=
-
-cart.map(x=>{
-
-const p=
-products.find(
-p=>p.id===x.id
-);
-
-return `- ${p.name} × ${x.qty}: ${money(p.price*x.qty)}`;
-
-}).join("\n");
-
-
-const msg=
-
-`سلام، سفارش جدید از فروشگاه هانلی 🌸
-
-نام: ${name}
-موبایل: ${phone}
-آدرس: ${address}
-
-محصولات:
-${items}
-
-جمع محصولات: ${money(total)}
-
-🚚 هزینه ارسال بر عهده خریدار است و هنگام تحویل درب منزل پرداخت می‌شود.
-
-پرداخت به کارت:
-6219 .card-number{font-size:20px;letter-spacing:1px;direction:ltr;display:inline-block;margin:5px 0}
-.shipping{background:#fff8fb;padding:13px;border-radius:12px;margin-top:10px;color:#7a5264;font-size:13px;border:1px solid #f0dce6}
-@media(max-width:600px){
-.hero h1{font-size:29px}
-.search{max-width:180px}
-.logo{font-size:22px}
+footer{
+  text-align:center;
+  padding:30px;
+  color:#777
 }
 </style>
 </head>
@@ -954,629 +193,65 @@ ${items}
 <body>
 
 <header>
-<nav>
-<div class="logo">
-هانلی
-<small>فروشگاه لوازم آرایشی</small>
-</div>
+  <h1>🌸 هانلی</h1>
+  <p>فروشگاه لوازم آرایشی و مراقبت پوست</p>
 
-<input id="search" class="search"
-placeholder="جست‌وجوی محصول..."
-oninput="render()">
-
-<button class="cart" onclick="openCart()">
-🛒 سبد خرید <span id="count">0</span>
-</button>
-</nav>
+  <nav>
+    <button class="nav-btn" onclick="openRegister()">👤 ثبت‌نام / ورود</button>
+    <button class="nav-btn" onclick="openCart()">🛒 سبد خرید (<span id="cartCount">0</span>)</button>
+  </nav>
 </header>
 
-<section class="hero">
-<h1>زیبایی، انتخاب توست ✨</h1>
-<p>محصولات آرایشی منتخب را در فروشگاه هانلی پیدا کن.</p>
-</section>
-
-<section class="categories">
-<h2>دسته‌بندی‌ها</h2>
-<button onclick="setCat('همه')">همه</button>
-<button onclick="setCat('لب')">رژ لب</button>
-<button onclick="setCat('چشم')">آرایش چشم</button>
-<button onclick="setCat('پوست')">مراقبت پوست</button>
-</section>
-
-<section class="products">
-<h2>محصولات</h2>
-<div id="grid" class="grid"></div>
-</section>
-
-<footer>
-© هانلی — فروشگاه لوازم آرایشی
-</footer>
-
-<div id="modal">
-<div class="box">
-
-<button class="close" onclick="closeCart()">×</button>
-
-<h2>سبد خرید</h2>
-
-<div id="cart"></div>
-
-<div id="total" style="font-weight:bold;margin-top:15px"></div>
-
-<div class="shipping">
-🚚 <b>هزینه ارسال:</b>
-بر عهده خریدار است و هنگام تحویل درب منزل پرداخت می‌شود.
-</div>
-
-<h3>اطلاعات سفارش</h3>
-
-<input id="name" placeholder="نام و نام خانوادگی">
-
-<input id="phone" placeholder="شماره موبایل">
-
-<textarea id="address" placeholder="آدرس"></textarea>
-
-<h3>💳 پرداخت کارت‌به‌کارت</h3>
-
-<div class="card-info">
-
-<b>شماره کارت:</b><br>
-
-<span class="card-number">
-6219 8619 8303 3399
-</span>
-
-<br>
-
-<b>به نام:</b>
-هانیه کریمی خانقاه
-
-<p style="font-size:13px;color:#777;margin-bottom:0">
-لطفاً مبلغ سفارش را به این کارت واریز کنید.
-</p>
-
-</div>
-
-<label style="font-size:13px">
-📷 انتخاب عکس رسید پرداخت:
-</label>
-
-<input id="receipt" type="file" accept="image/*">
-
-<button class="pay" onclick="checkout()">
-ثبت سفارش و ارسال به واتساپ
-</button>
-
-<p style="font-size:12px;color:#777">
-بعد از ثبت سفارش، واتساپ باز می‌شود.
-لطفاً عکس رسید پرداخت را نیز در همان واتساپ ارسال کنید.
-</p>
-
-</div>
-</div>
-
-<script>
-
-const products=[
-
-{id:1,name:"رژ لب مات هانلی",cat:"لب",price:249000,emoji:"💄"},
-
-{id:2,name:"ریمل حجم‌دهنده",cat:"چشم",price:319000,emoji:"🖤"},
-
-{id:3,name:"کرم مرطوب‌کننده",cat:"پوست",price:289000,emoji:"🧴"},
-
-{id:4,name:"پالت سایه چشم",cat:"چشم",price:459000,emoji:"🎨"},
-
-{id:5,name:"بالم لب",cat:"لب",price:159000,emoji:"💋"},
-
-{id:6,name:"سرم مراقبت پوست",cat:"پوست",price:529000,emoji:"✨"}
-
-];
-
-let cat="همه";
-let cart=[];
-
-const money=n =>
-n.toLocaleString("fa-IR")+" تومان";
-
-function setCat(c){
-cat=c;
-render();
-}
-
-function render(){
-
-let q=document
-.getElementById("search")
-.value
-.trim()
-.toLowerCase();
-
-let list=products.filter(p =>
-(cat==="همه"||p.cat===cat) &&
-(!q||p.name.toLowerCase().includes(q))
-);
-
-document.getElementById("grid").innerHTML=
-
-list.map(p=>`
-
-<article class="card">
-
-<div class="pic">
-${p.emoji}
-</div>
-
-<div class="info">
-
-<h3>${p.name}</h3>
-
-<small>${p.cat}</small>
-
-<div class="price">
-${money(p.price)}
-</div>
-
-<button class="add"
-onclick="add(${p.id})">
-افزودن به سبد خرید
-</button>
-
-</div>
-
-</article>
-
-`).join("");
-
-document.getElementById("count").textContent=
-cart.reduce((a,x)=>a+x.qty,0);
-}
-
-function add(id){
-
-let x=cart.find(x=>x.id===id);
-
-if(x){
-x.qty++;
-}else{
-cart.push({
-id:id,
-qty: padding:13px;
- border:0;
- border-radius:12px;
- background:#222;
- color:white;
- margin-top:10px;
- cursor:pointer
-}
-.card-info{
- background:#fff4f8;
- padding:15px;
- border-radius:12px;
- margin:10px 0;
- border:1px solid #f0dce6
-}
-.card-number{
- font-size:20px;
- letter-spacing:1px;
- direction:ltr;
- display:inline-block;
- margin:5px 0
-}
-@media(max-width:600px){
- .hero h1{font-size:29px}
- .search{max-width:180px}
- .logo{font-size:22px}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<nav>
-<div class="logo">
-هانلی
-<small>فروشگاه لوازم آرایشی</small>
-</div>
-
-<input
- id="search"
- class="search"
- placeholder="جست‌وجوی محصول..."
- oninput="render()"
->
-
-<button class="cart" onclick="openCart()">
-🛒 سبد خرید <span id="count">0</span>
-</button>
-</nav>
-</header>
-
-<section class="hero">
-<h1>زیبایی، انتخاب توست ✨</h1>
-<p>محصولات آرایشی منتخب را در فروشگاه هانلی پیدا کن.</p>
-</section>
-
-<section class="categories">
-<h2>دسته‌بندی‌ها</h2>
-
-<button onclick="setCat('همه')">همه</button>
-<button onclick="setCat('لب')">رژ لب</button>
-<button onclick="setCat('چشم')">آرایش چشم</button>
-<button onclick="setCat('پوست')">مراقبت پوست</button>
-</section>
-
-<section class="products">
-<h2>محصولات</h2>
-<div id="grid" class="grid"></div>
-</section>
-
-<footer>
-© هانلی — فروشگاه لوازم آرایشی
-</footer>
-
-<div id="modal">
-<div class="box">
-
-<button class="close" onclick="closeCart()">×</button>
-
-<h2>سبد خرید</h2>
-
-<div id="cart"></div>
-
-<div id="total" style="font-weight:bold;margin-top:15px"></div>
-
-<h3>اطلاعات سفارش</h3>
-
-<input
- id="name"
- placeholder="نام و نام خانوادگی"
->
-
-<input
- id="phone"
- placeholder="شماره موبایل"
->
-
-<textarea
- id="address"
- placeholder="آدرس"
-></textarea>
-
-<h3>💳 پرداخت کارت‌به‌کارت</h3>
-
-<div class="card-info">
-
-<b>شماره کارت:</b><br>
-
-<span class="card-number">
-6219 8619 8303 3399
-</span>
-
-<br>
-
-<b>به نام:</b>
-هانیه کریمی خانقاه
-
-<p style="font-size:13px;color:#777;margin-bottom:0">
-لطفاً مبلغ سفارش را به این کارت واریز کنید.
-</p>
-
-</div>
-
-<label style="font-size:13px">
-📷 انتخاب عکس رسید پرداخت:
-</label>
-
-<input
- id="receipt"
- type="file"
- accept="image/*"
->
-
-<button class="pay" onclick="checkout()">
-ثبت سفارش و ارسال به واتساپ
-</button>
-
-<p style="font-size:12px;color:#777">
-بعد از ثبت سفارش، واتساپ باز می‌شود.
-لطفاً عکس رسید پرداخت را نیز در همان واتساپ ارسال کنید.
-</p>
-
-</div>
-</div>
-
-<script>
-
-const products=[
-
-{id:1,name:"رژ لب مات هانلی",cat:"لب",price:249000,emoji:"💄"},
-
-{id:2,name:"ریمل حجم‌دهنده",cat:"چشم",price:319000,emoji:"🖤"},
-
-{id:3,name:"کرم مرطوب‌کننده",cat:"پوست",price:289000,emoji:"🧴"},
-
-{id:4,name:"پالت سایه چشم",cat:"چشم",price:459000,emoji:"🎨"},
-
-{id:5,name:"بالم لب",cat:"لب",price:159000,emoji:"💋"},
-
-{id:6,name:"سرم مراقبت پوست",cat:"پوست",price:529000,emoji:"✨"}
-
-];
-
-let cat="همه";
-let cart=[];
-
-const money=n =>
- n.toLocaleString("fa-IR")+" تومان";
-
-function setCat(c){
- cat=c;
- render();
-}
-
-function render(){
-
- let q=document
- .getElementById("search")
- .value
- .trim()
- .toLowerCase();
-
- let list=products.filter(p =>
- (cat==="همه"||p.cat===cat) &&
- (!q||p.name.toLowerCase().includes(q))
- );
-
- document.getElementById("grid").innerHTML=
- list.map(p=>`
-
- <article class="card">
-
- <div class="pic">
- ${p.emoji}
- </div>
-
- <div class="info">
-
- <h3>${p.name}</h3>
-
- <small>${p.cat}</small>
-
- <div class="price">
- ${money(p.price)}
- </div>
-
- <button
- class="add"
- onclick="add(${p.id})">
- افزودن به سبد خرید
- </button>
-
- </div>
-
- </article>
-
- `).join("");
-
- document.getElementById("count").textContent=
- cart.reduce((a,x)=>a+x.qty,0);
-}
-
-function add(id){
-
- let x=cart.find(x=>x.id===id);
-
- if(x){
-   x.qty++;
- }else{
-   cart.push({
-    id:id,
-    qty:1
-   });
- }
-
- render();
- openCart();
-}
-
-function openCart(){
-
- document.getElementById("modal")
- .style.display="block";
-
- drawCart();
-}
-
-function closeCart(){
-
- document.getElementById("modal")
- .style.display="none";
-}
-
-function drawCart(){
-
- let el=document.getElementById("cart");
-
- if(!cart.length){
-
-  el.innerHTML="<p>سبد خرید خالی است.</p>";
-
-  document.getElementById("total")
-  .textContent="";
-
-  return;
- }
-
- el.innerHTML=
- cart.map(x=>{
-
-  let p=products.find(p=>p.id===x.id);
-
-  return `
-
-  <div class="item">
-
-  <span>
-  ${p.name} × ${x.qty}
-  </span>
-
-  <b>
-  ${money(p.price*x.qty)}
-  </b>
-
+<div class="container">
+
+  <div id="userBox" class="user-box hidden"></div>
+
+  <input
+    id="search"
+    class="search"
+    placeholder="🔎 جستجوی محصول..."
+    oninput="renderProducts()"
+  >
+
+  <div class="categories">
+    <button onclick="filterProducts('همه')">همه</button>
+    <button onclick="filterProducts('لب')">لب</button>
+    <button onclick="filterProducts('چشم')">چشم</button>
+    <button onclick="filterProducts('پوست')">پوست</button>
   </div>
 
-  `;
+  <div id="products" class="products"></div>
 
- }).join("");
+</div>
 
- let total=
- cart.reduce(
-  (s,x)=>
-  s+products.find(p=>p.id===x.id).price*x.qty,
-  0
- );
+<footer>
+  هانلی ❤️ خرید آسان و مطمئن
+</footer>
 
- document.getElementById("total")
- .textContent="جمع: "+money(total);
-}
 
-function checkout(){
+<!-- سبد خرید -->
+<div id="cartModal" class="modal">
+  <div class="modal-box">
 
- if(!cart.length){
+    <button class="close" onclick="closeCart()">✕ بستن</button>
 
-  return alert("سبد خرید خالی است.");
+    <h2>🛒 سبد خرید</h2>
 
- }
+    <div id="cartItems"></div>
 
- const name=
- document.getElementById("name")
- .value.trim();
+    <div id="cartTotal" class="total"></div>
 
- const phone=
- document.getElementById("phone")
- .value.trim();
+    <div class="shipping">
+      🚚 هزینه ارسال بر عهده خریدار است و هنگام تحویل درب منزل پرداخت می‌شود.
+    </div>
 
- const address=
- document.getElementById("address")
- .value.trim();
+    <h3>📦 اطلاعات گیرنده</h3>
 
- if(!name||!phone||!address){
+    <input id="name" placeholder="نام و نام خانوادگی">
+    <input id="phone" placeholder="شماره موبایل">
+    <textarea id="address" rows="3" placeholder="آدرس کامل"></textarea>
 
-  return alert(
-   "لطفاً اطلاعات سفارش را کامل کنید."
-  );
-
- }
-
- const total=
- cart.reduce(
-  (s,x)=>
-  s+products.find(p=>p.id===x.id).price*x.qty,
-  0
- );
-
- const items=
- cart.map(x=>{
-
-  const p=
-  products.find(p=>p.id===x.id);
-
-  return `- ${p.name} × ${x.qty}: ${money(p.price*x.qty)}`;
-
- }).join("\n");
-
- const msg=
- `سلام، سفارش جدید از فروشگاه هانلی 🌸
-
-نام: ${name}
-موبایل: ${phone}
-آدرس: ${address}
-
-محصولات:
-${items}
-
-جمع سفارش: ${money(total)}
-
-پرداخت به کارت:
-6219 8619 8303 3399
-
-به نام:
-هانیه کریمی خانقاه
-
-رسید پرداخت را در همین واتساپ ارسال می‌کنم.`;
-
- window.location.href=
- "https://wa.me/989113899846?text="+
- encodeURIComponent(msg);
-}
-
-render();
-
-</script>
-
-</body>
-</html><button class="cart" onclick="openCart()">🛒 سبد خرید <span id="count">0</span></button>
-</nav></header>
-
-<section class="hero"><h1>زیبایی، انتخاب توست ✨</h1><p>محصولات آرایشی منتخب را در فروشگاه هانلی پیدا کن.</p></section>
-
-<section class="categories">
-<h2>دسته‌بندی‌ها</h2>
-<button onclick="setCat('همه')">همه</button><button onclick="setCat('لب')">رژ لب</button>
-<button onclick="setCat('چشم')">آرایش چشم</button><button onclick="setCat('پوست')">مراقبت پوست</button>
-</section>
-
-<section class="products"><h2>محصولات</h2><div id="grid" class="grid"></div></section>
-<footer>© هانلی — فروشگاه لوازم آرایشی</footer>
-
-<div id="modal"><div class="box">
-<button class="close" onclick="closeCart()">×</button><h2>سبد خرید</h2><div id="cart"></div>
-<div id="total" style="font-weight:bold;margin-top:15px"></div>
-<h3>اطلاعات سفارش</h3>
-<input id="name" placeholder="نام و نام خانوادگی">
-<input id="phone" placeholder="شماره موبایل">
-<textarea id="address" placeholder="آدرس"></textarea>
-<button class="pay" onclick="checkout()">ادامه برای پرداخت آنلاین</button>
-<p style="font-size:12px;color:#777">درگاه پرداخت واقعی پس از اتصال درگاه بانکی فعال می‌شود.</p>
-</div></div>
-
-<script>
-const products=[
-{id:1,name:"رژ لب مات هانلی",cat:"لب",price:249000,emoji:"💄"},
-{id:2,name:"ریمل حجم‌دهنده",cat:"چشم",price:319000,emoji:"🖤"},
-{id:3,name:"کرم مرطوب‌کننده",cat:"پوست",price:289000,emoji:"🧴"},
-{id:4,name:"پالت سایه چشم",cat:"چشم",price:459000,emoji:"🎨"},
-{id:5,name:"بالم لب",cat:"لب",price:159000,emoji:"💋"},
-{id:6,name:"سرم مراقبت پوست",cat:"پوست",price:529000,emoji:"✨"}
-];
-let cat="همه",cart=[];
-const money=n=>n.toLocaleString("fa-IR")+" تومان";
-function setCat(c){cat=c;render()}
-function render(){
- let q=document.getElementById("search").value.trim().toLowerCase();
- let list=products.filter(p=>(cat==="همه"||p.cat===cat)&&(!q||p.name.toLowerCase().includes(q)));
- document.getElementById("grid").innerHTML=list.map(p=>`<article class="card"><div class="pic">${p.emoji}</div><div class="info"><h3>${p.name}</h3><small>${p.cat}</small><div class="price">${money(p.price)}</div><button class="add" onclick="add(${p.id})">افزودن به سبد خرید</button></div></article>`).join("");
- document.getElementById("count").textContent=cart.reduce((a,x)=>a+x.qty,0);
-}
-function add(id){let x=cart.find(x=>x.id===id);x?x.qty++:cart.push({id,qty:1});render();openCart()}
-function openCart(){document.getElementById("modal").style.display="block";drawCart()}
-function closeCart(){document.getElementById("modal").style.display="none"}
-function drawCart(){
- let el=document.getElementById("cart");
- if(!cart.length){el.innerHTML="<p>سبد خرید خالی است.</p>";document.getElementById("total").textContent="";return}
- el.innerHTML=cart.map(x=>{let p=products.find(p=>p.id===x.id);return `<div class="item"><span>${p.name} × ${x.qty}</span><b>${money(p.price*x.qty)}</b></div>`}).join("");
- document.getElementById("total").textContent="جمع: "+money(cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0));
-}
-function checkout(){
- if(!cart.length)return alert("سبد خرید خالی است.");
- if(!document.getElementById("name").value||!document.getElementById("phone").value||!document.getElementById("address").value)
- return alert("لطفاً اطلاعات سفارش را کامل کنید.");
- alert("این نسخه آزمایشی است. برای پرداخت واقعی باید درگاه پرداخت به سایت متصل شود.");
-}
-render();
-</script>
-</body>
-</html>
+    <div class="card-box">
+      <b>💳 پرداخت کارت به کارت</b>
+      <p>شماره کارت:</p>
+      <strong
