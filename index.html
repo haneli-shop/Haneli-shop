@@ -4,37 +4,543 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>هانلی | فروشگاه لوازم آرایشی</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#fff8fb;color:#292329}
-header{background:#fff;border-bottom:1px solid #f0dce6;position:sticky;top:0;z-index:5}
-nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:28px;font-weight:800;color:#9d3565}.logo small{display:block;font-size:11px;color:#888;font-weight:400}
-.search{flex:1;max-width:430px;padding:12px 16px;border:1px solid #ead5df;border-radius:25px;outline:0}
-.cart{border:0;background:#9d3565;color:white;padding:11px 17px;border-radius:24px;cursor:pointer}
-.hero{max-width:1100px;margin:25px auto;padding:45px 25px;border-radius:25px;background:linear-gradient(120deg,#f8dbe7,#fff);text-align:center}
-.hero h1{font-size:38px;margin:0 0 10px}.hero p{color:#6f6268}
-.categories,.products{max-width:1100px;margin:25px auto;padding:0 20px}
-.categories button{background:white;border:1px solid #ead5df;padding:9px 15px;border-radius:20px;margin:5px;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.card{background:#fff;border:1px solid #f0dce6;border-radius:18px;overflow:hidden;box-shadow:0 4px 15px #8d4c6710}
-.pic{height:190px;background:#f8edf2;display:flex;align-items:center;justify-content:center;font-size:65px}
-.info{padding:15px}.info h3{margin:0 0 8px}.price{font-weight:bold;color:#9d3565;margin:10px 0}
-.add{width:100%;padding:11px;border:0;border-radius:12px;background:#9d3565;color:#fff;cursor:pointer}
-footer{text-align:center;padding:35px;color:#88747d}
-#modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;padding:20px}
-.box{background:#fff;max-width:520px;margin:40px auto;padding:22px;border-radius:20px;max-height:85vh;overflow:auto}
-.close{float:left;border:0;background:#eee;border-radius:50%;width:30px;height:30px}
-.item{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0}
-input,textarea{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:10px}
-.pay{width:100%;padding:13px;border:0;border-radius:12px;background:#222;color:white;margin-top:10px;cursor:pointer}
-@media(max-width:600px){.hero h1{font-size:29px}.search{max-width:180px}.logo{font-size:22px}}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Tahoma,Arial,sans-serif;
+ background:#fff8fb;
+ color:#292329
+}
+header{
+ background:#fff;
+ border-bottom:1px solid #f0dce6;
+ position:sticky;
+ top:0;
+ z-index:5
+}
+nav{
+ max-width:1100px;
+ margin:auto;
+ padding:15px 20px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px
+}
+.logo{
+ font-size:28px;
+ font-weight:800;
+ color:#9d3565
+}
+.logo small{
+ display:block;
+ font-size:11px;
+ color:#888;
+ font-weight:400
+}
+.search{
+ flex:1;
+ max-width:430px;
+ padding:12px 16px;
+ border:1px solid #ead5df;
+ border-radius:25px;
+ outline:0
+}
+.cart{
+ border:0;
+ background:#9d3565;
+ color:white;
+ padding:11px 17px;
+ border-radius:24px;
+ cursor:pointer
+}
+.hero{
+ max-width:1100px;
+ margin:25px auto;
+ padding:45px 25px;
+ border-radius:25px;
+ background:linear-gradient(120deg,#f8dbe7,#fff);
+ text-align:center
+}
+.hero h1{
+ font-size:38px;
+ margin:0 0 10px
+}
+.hero p{color:#6f6268}
+.categories,.products{
+ max-width:1100px;
+ margin:25px auto;
+ padding:0 20px
+}
+.categories button{
+ background:white;
+ border:1px solid #ead5df;
+ padding:9px 15px;
+ border-radius:20px;
+ margin:5px;
+ cursor:pointer
+}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+ gap:18px
+}
+.card{
+ background:#fff;
+ border:1px solid #f0dce6;
+ border-radius:18px;
+ overflow:hidden;
+ box-shadow:0 4px 15px #8d4c6710
+}
+.pic{
+ height:190px;
+ background:#f8edf2;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:65px
+}
+.info{padding:15px}
+.info h3{margin:0 0 8px}
+.price{
+ font-weight:bold;
+ color:#9d3565;
+ margin:10px 0
+}
+.add{
+ width:100%;
+ padding:11px;
+ border:0;
+ border-radius:12px;
+ background:#9d3565;
+ color:#fff;
+ cursor:pointer
+}
+footer{
+ text-align:center;
+ padding:35px;
+ color:#88747d
+}
+#modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ z-index:10;
+ padding:20px
+}
+.box{
+ background:#fff;
+ max-width:520px;
+ margin:40px auto;
+ padding:22px;
+ border-radius:20px;
+ max-height:85vh;
+ overflow:auto
+}
+.close{
+ float:left;
+ border:0;
+ background:#eee;
+ border-radius:50%;
+ width:30px;
+ height:30px
+}
+.item{
+ display:flex;
+ justify-content:space-between;
+ border-bottom:1px solid #eee;
+ padding:12px 0
+}
+input,textarea{
+ width:100%;
+ padding:12px;
+ margin:6px 0;
+ border:1px solid #ddd;
+ border-radius:10px
+}
+.pay{
+ width:100%;
+ padding:13px;
+ border:0;
+ border-radius:12px;
+ background:#222;
+ color:white;
+ margin-top:10px;
+ cursor:pointer
+}
+.card-info{
+ background:#fff4f8;
+ padding:15px;
+ border-radius:12px;
+ margin:10px 0;
+ border:1px solid #f0dce6
+}
+.card-number{
+ font-size:20px;
+ letter-spacing:1px;
+ direction:ltr;
+ display:inline-block;
+ margin:5px 0
+}
+@media(max-width:600px){
+ .hero h1{font-size:29px}
+ .search{max-width:180px}
+ .logo{font-size:22px}
+}
 </style>
 </head>
+
 <body>
-<header><nav>
-<div class="logo">هانلی<small>فروشگاه لوازم آرایشی</small></div>
-<input id="search" class="search" placeholder="جست‌وجوی محصول..." oninput="render()">
-<button class="cart" onclick="openCart()">🛒 سبد خرید <span id="count">0</span></button>
+
+<header>
+<nav>
+<div class="logo">
+هانلی
+<small>فروشگاه لوازم آرایشی</small>
+</div>
+
+<input
+ id="search"
+ class="search"
+ placeholder="جست‌وجوی محصول..."
+ oninput="render()"
+>
+
+<button class="cart" onclick="openCart()">
+🛒 سبد خرید <span id="count">0</span>
+</button>
+</nav>
+</header>
+
+<section class="hero">
+<h1>زیبایی، انتخاب توست ✨</h1>
+<p>محصولات آرایشی منتخب را در فروشگاه هانلی پیدا کن.</p>
+</section>
+
+<section class="categories">
+<h2>دسته‌بندی‌ها</h2>
+
+<button onclick="setCat('همه')">همه</button>
+<button onclick="setCat('لب')">رژ لب</button>
+<button onclick="setCat('چشم')">آرایش چشم</button>
+<button onclick="setCat('پوست')">مراقبت پوست</button>
+</section>
+
+<section class="products">
+<h2>محصولات</h2>
+<div id="grid" class="grid"></div>
+</section>
+
+<footer>
+© هانلی — فروشگاه لوازم آرایشی
+</footer>
+
+<div id="modal">
+<div class="box">
+
+<button class="close" onclick="closeCart()">×</button>
+
+<h2>سبد خرید</h2>
+
+<div id="cart"></div>
+
+<div id="total" style="font-weight:bold;margin-top:15px"></div>
+
+<h3>اطلاعات سفارش</h3>
+
+<input
+ id="name"
+ placeholder="نام و نام خانوادگی"
+>
+
+<input
+ id="phone"
+ placeholder="شماره موبایل"
+>
+
+<textarea
+ id="address"
+ placeholder="آدرس"
+></textarea>
+
+<h3>💳 پرداخت کارت‌به‌کارت</h3>
+
+<div class="card-info">
+
+<b>شماره کارت:</b><br>
+
+<span class="card-number">
+6219 8619 8303 3399
+</span>
+
+<br>
+
+<b>به نام:</b>
+هانیه کریمی خانقاه
+
+<p style="font-size:13px;color:#777;margin-bottom:0">
+لطفاً مبلغ سفارش را به این کارت واریز کنید.
+</p>
+
+</div>
+
+<label style="font-size:13px">
+📷 انتخاب عکس رسید پرداخت:
+</label>
+
+<input
+ id="receipt"
+ type="file"
+ accept="image/*"
+>
+
+<button class="pay" onclick="checkout()">
+ثبت سفارش و ارسال به واتساپ
+</button>
+
+<p style="font-size:12px;color:#777">
+بعد از ثبت سفارش، واتساپ باز می‌شود.
+لطفاً عکس رسید پرداخت را نیز در همان واتساپ ارسال کنید.
+</p>
+
+</div>
+</div>
+
+<script>
+
+const products=[
+
+{id:1,name:"رژ لب مات هانلی",cat:"لب",price:249000,emoji:"💄"},
+
+{id:2,name:"ریمل حجم‌دهنده",cat:"چشم",price:319000,emoji:"🖤"},
+
+{id:3,name:"کرم مرطوب‌کننده",cat:"پوست",price:289000,emoji:"🧴"},
+
+{id:4,name:"پالت سایه چشم",cat:"چشم",price:459000,emoji:"🎨"},
+
+{id:5,name:"بالم لب",cat:"لب",price:159000,emoji:"💋"},
+
+{id:6,name:"سرم مراقبت پوست",cat:"پوست",price:529000,emoji:"✨"}
+
+];
+
+let cat="همه";
+let cart=[];
+
+const money=n =>
+ n.toLocaleString("fa-IR")+" تومان";
+
+function setCat(c){
+ cat=c;
+ render();
+}
+
+function render(){
+
+ let q=document
+ .getElementById("search")
+ .value
+ .trim()
+ .toLowerCase();
+
+ let list=products.filter(p =>
+ (cat==="همه"||p.cat===cat) &&
+ (!q||p.name.toLowerCase().includes(q))
+ );
+
+ document.getElementById("grid").innerHTML=
+ list.map(p=>`
+
+ <article class="card">
+
+ <div class="pic">
+ ${p.emoji}
+ </div>
+
+ <div class="info">
+
+ <h3>${p.name}</h3>
+
+ <small>${p.cat}</small>
+
+ <div class="price">
+ ${money(p.price)}
+ </div>
+
+ <button
+ class="add"
+ onclick="add(${p.id})">
+ افزودن به سبد خرید
+ </button>
+
+ </div>
+
+ </article>
+
+ `).join("");
+
+ document.getElementById("count").textContent=
+ cart.reduce((a,x)=>a+x.qty,0);
+}
+
+function add(id){
+
+ let x=cart.find(x=>x.id===id);
+
+ if(x){
+   x.qty++;
+ }else{
+   cart.push({
+    id:id,
+    qty:1
+   });
+ }
+
+ render();
+ openCart();
+}
+
+function openCart(){
+
+ document.getElementById("modal")
+ .style.display="block";
+
+ drawCart();
+}
+
+function closeCart(){
+
+ document.getElementById("modal")
+ .style.display="none";
+}
+
+function drawCart(){
+
+ let el=document.getElementById("cart");
+
+ if(!cart.length){
+
+  el.innerHTML="<p>سبد خرید خالی است.</p>";
+
+  document.getElementById("total")
+  .textContent="";
+
+  return;
+ }
+
+ el.innerHTML=
+ cart.map(x=>{
+
+  let p=products.find(p=>p.id===x.id);
+
+  return `
+
+  <div class="item">
+
+  <span>
+  ${p.name} × ${x.qty}
+  </span>
+
+  <b>
+  ${money(p.price*x.qty)}
+  </b>
+
+  </div>
+
+  `;
+
+ }).join("");
+
+ let total=
+ cart.reduce(
+  (s,x)=>
+  s+products.find(p=>p.id===x.id).price*x.qty,
+  0
+ );
+
+ document.getElementById("total")
+ .textContent="جمع: "+money(total);
+}
+
+function checkout(){
+
+ if(!cart.length){
+
+  return alert("سبد خرید خالی است.");
+
+ }
+
+ const name=
+ document.getElementById("name")
+ .value.trim();
+
+ const phone=
+ document.getElementById("phone")
+ .value.trim();
+
+ const address=
+ document.getElementById("address")
+ .value.trim();
+
+ if(!name||!phone||!address){
+
+  return alert(
+   "لطفاً اطلاعات سفارش را کامل کنید."
+  );
+
+ }
+
+ const total=
+ cart.reduce(
+  (s,x)=>
+  s+products.find(p=>p.id===x.id).price*x.qty,
+  0
+ );
+
+ const items=
+ cart.map(x=>{
+
+  const p=
+  products.find(p=>p.id===x.id);
+
+  return `- ${p.name} × ${x.qty}: ${money(p.price*x.qty)}`;
+
+ }).join("\n");
+
+ const msg=
+ `سلام، سفارش جدید از فروشگاه هانلی 🌸
+
+نام: ${name}
+موبایل: ${phone}
+آدرس: ${address}
+
+محصولات:
+${items}
+
+جمع سفارش: ${money(total)}
+
+پرداخت به کارت:
+6219 8619 8303 3399
+
+به نام:
+هانیه کریمی خانقاه
+
+رسید پرداخت را در همین واتساپ ارسال می‌کنم.`;
+
+ window.location.href=
+ "https://wa.me/989113899846?text="+
+ encodeURIComponent(msg);
+}
+
+render();
+
+</script>
+
+</body>
+</html><button class="cart" onclick="openCart()">🛒 سبد خرید <span id="count">0</span></button>
 </nav></header>
 
 <section class="hero"><h1>زیبایی، انتخاب توست ✨</h1><p>محصولات آرایشی منتخب را در فروشگاه هانلی پیدا کن.</p></section>
